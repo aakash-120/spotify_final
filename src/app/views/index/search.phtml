@@ -1,0 +1,180 @@
+<?php
+if(isset($track))
+{
+?>
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <?php
+        foreach ($track->tracks->items as $albums) {
+        ?>
+            <div class="tile border col-md-6 m-2 p-3 rounded-lg d-flex align-items-center">
+                <img src="<?php echo $albums->album->images[0]->url ?>" style="width: 100px;height:100px;" class="rounded-lg" alt="">
+                <div class="title ml-2">
+                    <a class="m-0 p-0" href=<?php echo $albums->album->external_urls->spotify ?>>Open on spotify</a>
+                    <p class="m-0 p-0"><?php echo $albums->name ?></p>
+                    <p class="m-0 p-0"><?php echo $albums->id ?></p>
+                    <p class="m-0 p-0"><?php echo $albums->uri ?></p>
+                </div>
+            </div>
+
+        <?php
+        }
+        ?>
+    </div>
+</div>
+
+<?php
+}
+?>
+
+
+
+
+
+
+<?php
+if(isset($album))
+{
+?>
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+      
+    <?php
+        foreach ($album->albums->items as $item) {
+            echo "<pre>";
+            foreach($item->artists as $artist);
+            {
+                print_r($artist->external_urls->spotify);
+                echo "<br>";
+                print_r($artist->id);
+                echo "<br>";
+                print_r($artist->name);
+                echo "<br>";
+                print_r($artist->uri);
+                echo "<br>";
+                print_r($item->images[1]->url);
+            }
+            echo "</pre>";
+            echo "<br>";
+            // print_r($album1->external_urls);
+            // print_r($album1->id);
+            // print_r($album1->images[0]->url);
+           
+        ?>
+
+
+          <?php
+        }
+        ?>
+    </div>
+</div>
+
+
+<?php
+}
+?>
+
+
+
+<?php
+if(isset($artist))
+{
+ ?>
+    <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+ <?php     
+    foreach($artist->artists->items as $item)
+    {
+        ?> 
+    <div class="tile border col-md-6 m-2 p-3 rounded-lg d-flex align-items-center">
+        <?php
+          if(isset($item->images[1]->url))
+          {
+              ?>
+              <img src="<?php echo $item->images[1]->url ?>" style="width: 120px;height:120px;" class="rounded-lg" alt="">
+              <?php  
+          }
+          ?>
+           <div class="title ml-2">
+           <a class="m-0 p-0" href=<?php echo $item->external_urls->spotify ?>>Open on spotify</a>
+           <p class="m-0 p-0">Followers : <?php echo $item->followers->total ?></p>
+           <p class="m-0 p-0">Item Id : <?php echo $item->id ?></p>
+           <ul class="m-0 p-0">Genres :            
+           <?php   
+           if(count($item->genres) > 0)
+           {
+               foreach($item->genres as $k => $v)
+               {
+               ?>
+                 <li class="ml-3 p-"><?php  print_r($v) ?></li>
+                 
+               <?php
+               }
+// print_r($item->genres);
+           }   
+                
+      
+      
+      ?>
+           </ul>
+           </div>
+
+    
+    </div>
+</div>
+
+<?php
+}}
+?>
+
+
+
+
+<?php
+if(isset($playlist))
+{ 
+?>
+  <p class="m-0 p-0">Total Playlist <?php  print_r($playlist['total']); ?></p>
+
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+  
+        <?php
+        foreach ($playlist['items'] as $item) {
+        ?>
+            <div class="tile border col-md-6 m-2 p-3 rounded-lg d-flex align-items-center">
+            <img src="<?php if(isset($item['images'][0]))
+            {
+                print_r($item['images'][0]['url']);
+            }
+            else{
+                print_r('https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png');
+            }; ?>" style="width: 150px;height:150px;" class="rounded-lg" alt="">
+                <div class="title ml-2">             
+                    <p class="m-0 p-0">Playlist Name : <?php  print_r($item['name']); ?></p>
+                    <p class="m-0 p-0">Description : <?php  print_r($item['description']); ?></p>
+                    <u><a class="m-0 p-0" href="<?php  print_r($item['external_urls']['spotify']); ?>">Open in Spotify</a></u>
+                    <p class="m-0 p-0">Id : <?php  print_r($item['id']); ?></p>                  
+                    <p class="m-0 p-0">Uri : <?php  print_r($item['uri']); ?></p>
+                    <p class="m-0 p-0">Tracks : <?php  print_r($item['tracks']['total']); ?></p>
+                    <a class="m-0 p-1 btn btn-primary" href="/index/addtrack">Add Tracks</a>
+                    
+                    <a class="m-0 p-1 btn btn-danger" href="/index/deletetrack">Delete Tracks</a>
+                    
+                    
+                </div>
+            </div>
+            
+        <?php
+        }
+        ?>
+        
+    </div>
+</div>
+
+
+<?php
+}
+ ?>
