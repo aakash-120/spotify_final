@@ -159,9 +159,15 @@ if(isset($playlist))
                     <p class="m-0 p-0">Id : <?php  print_r($item['id']); ?></p>                  
                     <p class="m-0 p-0">Uri : <?php  print_r($item['uri']); ?></p>
                     <p class="m-0 p-0">Tracks : <?php  print_r($item['tracks']['total']); ?></p>
-                    <a class="m-0 p-1 btn btn-primary" href="/index/addtrack">Add Tracks</a>
+                    <form action="/index/addtrack" method="post">
+                    <button type=submit class="m-0 p-1 btn btn-primary">Add Tracks</button>
                     
-                    <a class="m-0 p-1 btn btn-danger" href="/index/deletetrack">Delete Tracks</a>
+                    </form>
+                    <br>
+                    <form action="/index/deletetrack" method="post">
+                    <button type=submit class="m-0 p-1 btn btn-danger">Delete Tracks</button>
+                     </form>
+                  
                     
                     
                 </div>
